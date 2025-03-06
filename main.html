@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8th</title>
+    <style>
+      body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #aaba99;
+    margin: 0;
+    }
+
+
+#revealButton {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #F8C8DC;
+    border: solid;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+
+
+        #puzzleContainer {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .piece {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <button id="revealButton">click me</button>
+    <div id="puzzleContainer"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const puzzleContainer = document.getElementById("puzzleContainer");
+            const pieces = [
+                { src: "piece_0_0.png", top: 0, left: 0 },
+                { src: "piece_0_1.png", top: 0, left: 100 },
+                { src: "piece_0_2.png", top: 0, left: 200 },
+                { src: "piece_1_0.png", top: 100, left: 0 },
+                { src: "piece_1_1.png", top: 100, left: 100 },
+                { src: "piece_1_2.png", top: 100, left: 200 },
+                { src: "piece_2_0.png", top: 200, left: 0 },
+                { src: "piece_2_1.png", top: 200, left: 100 },
+                { src: "piece_2_2.png", top: 200, left: 200 }
+            ];
+
+            pieces.forEach(piece => {
+                let img = document.createElement("img");
+                img.src = piece.src;
+                img.classList.add("piece");
+                img.style.top = `${piece.top}px`;
+                img.style.left = `${piece.left}px`;
+                puzzleContainer.appendChild(img);
+            });
+        });
+
+        document.getElementById("revealButton").addEventListener("click", function() {
+            this.style.display = "none";
+            let images = document.querySelectorAll(".piece");
+
+            images.forEach((img, index) => {
+                setTimeout(() => {
+                    img.style.opacity = "1";
+                    img.style.transform = "scale(1)";
+                }, index * 500);
+            });
+        });
+    </script>
+</body>
+</html>
